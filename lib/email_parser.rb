@@ -4,15 +4,12 @@
 
 class EmailParser
   attr_accessor :emails
+
   def initialize(emails)
     @emails = emails
   end
 
   def parse
-    split_at_spaces = @emails.split(" ")
-    no_commas = split_at_spaces.collect do |email|
-      email.chomp(",")
-    end
-    return no_commas.uniq
+    @emails.split(/,| /).delete_if {|email| email == ""}.uniq
   end
 end
